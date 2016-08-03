@@ -1,0 +1,26 @@
+{
+  "version":"1.0.0",
+  "name":"FriendlyPix",
+  "launch_path":"/index.html",
+  "description":"Share yo pix",
+  "icons":{
+    "128":"/images/touch/touch-icon-128-128.png"
+  },
+  "developer":{
+    "name":"me",
+    "url":"comeingSoon"
+  },
+  "installs_allowed_from":[
+    "*"
+  ],
+  "default_locale":"en",
+  "permissions":{
+
+  },
+  "locales":{
+    "en":{
+      "name":"FriendlyPix",
+      "description":"Share yo pix"
+    }
+  }
+}
