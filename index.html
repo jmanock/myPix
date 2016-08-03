@@ -2,8 +2,299 @@
 <head>
   <meta charset="UTF-8">
   <title>MyPix</title>
+  <link rel="stylesheet" href="/images/favicon.png">
+  <link rel="stylesheet" href="/manifest.json">
+  <link rel="stylesheet" href="/images/touch/touch-icon-192x192.png">
+  <link rel="stylesheet" href="/images/touch/touch-icon-128x128.png">
+  <link rel="stylesheet" href="/images/touch/touch-icon-180x180.png">
+  <link rel="stylesheet" href="/bower_components/material-design-lite/material.mn.css">
+  <script defer src='/bower_components/material-design-lite/materal.min.js'></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,300">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css>family=Amaranth:700">
+  <link rel="stylesheet" href="/styles/main.css">
 </head>
 <body>
+  <div class="fp-theater"><img src="" alt="" class='fp-fullpic'></div>
+
+  <section id='page-splash'>
+    <h3 class='fp-logo'><i class='material-icons'>Photo</i>FriendlyPix</h3>
+    <div class="fp-caption">The friendliest way to share a story</div>
+    <div class="fp-signed-out-only fp-initially-hidden">
+      <div id="firebaseui-auth-container" class='fp-signed-out-only fp-initially-hidden'></div>
+      <a href="/feed" class='fp-skip'>SkipSingIn</a>
+    </div>
+  </section>
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class='fp-header mdl-layout__header mdl-color-text--white mdl-color--light-blue-700'>
+      <div class="mdl-layout__header-row fp-titlebar">
+        <h3 class='fp-logo'><a href="/feed"><i class='material-icons'>Photo</i>FriendlyPix</a></h3>
+        <div class="mdl-layout-spacer"></div>
+        <div class="fp-searchcontainer mdl-texfield mdl-js-textfield mdl-textfield--expandable">
+          <label for="searchQuery" class='mdl-button mdl-js-button mdl-button--icon'>
+            <i class='material-icons'>Search</i>
+          </label>
+          <div class="mdl-textfield__expandable-holder">
+            <input type="text" id='searchQuery' class='mdl-textfield__input'>
+            <label for="searchQuery" class='mdl-textfield__label'>Enter yo Search</label>
+          </div>
+          <div id="fp-searchResults" class='mdl-card mdl-shadow--2dp'></div>
+        </div>
+
+        <a href="/"><button class='fp-sign-in-button fp-signed-out-ony mdl-button mdl-js-button mdl-js-ripple-effect'><i class='material-icons'>account_circle</i>SignIn</button></a>
+        <div class="fp-signed-in-user-container mdl-cell--hide-phont fp-signed-in-only">
+          <a href="" class='fp-usernamelink mdl-button mdl-js-button'>
+            <div class='fp-avatar'></div>
+            <div class='fp-username mdl-color-text--white'></div>
+          </a>
+        </div>
+
+        <button class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-cell--hide-phone' id='fp-menu'>
+          <i class='material-icons'>more_wert</i>
+        </button>
+        <ul class='fp-menu-list mdl-menu mdl-js-menu mdl-js-ripple0effect mdl-menu--bottom-right' for='fp-menu'>
+          <a href="/about">
+            <li class='mdl-menu__item'><i class='material-icons'>perm_contact_calendar</i>About - Help - Contact</li>
+          </a>
+          <li class='fp-sign-out mdl-menu__item fp-signed-in-only'><i class='material-icons'>exit_to_app</i>SignOut</li>
+        </ul>
+      </div>
+
+      <div class="fp-tab mdl-layout__header-row mdl-cell--hide-phone mdl-color--light-blue-600">
+        <div class="mdl-tab">
+          <a href="/" id='fp-menu-home' class='mdl-layout__tab fp-signed-in-only is-active mdl-button mdl-js-button mdl-js-ripple-effect'><i class='material-icons'>home</i>Home</a>
+          <a href="/feed" id='fp-menu-feed' class='mdl-layout__tab mdl-button mdl-js-button mdl-js-ripple-effect'><i class='material-icons'>trending_up</i>Feed</a>
+          <input type="file" id='fp-mediacapture' accept='image/*;capture=camera'>
+          <button class='fp-signed-in-only mdl-button mdl-js-button mdl-button--fab mdl-cell--hide-tablet mdl-color--amber-400 mdl-shadow--4dp mdl-js-ripple-effect' id='add'>
+            <i class='material-icons'>file_upload</i>
+          </button>
+        </div>
+      </div>
+      <button class='fp-signed-in-only mdl-cell--hide-desktop mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--amber-400 mdl-shadow--4dp' id='add-floating'>
+        <i class='material-icons'>photo_camera</i>
+      </button>
+    </header>
+
+    <div class="mdl-cell--hide-desktop mdl-cell--hide-tablet mdl-layout__drawer">
+      <button class='fp-sign-in-button fp-signed-out-ony mdl-button mdl-js-button mdl-js-ripple-effect'><i class='material-icons'>account_circle</i></button>
+      <div class="fp-signed-in-user-container mdl-color--light-blue-700 fp-signed-in-only">
+        <a href="" class='fp-ussernamelink'>
+          <div class='fp-avatar'></div>
+          <div class='fp-username mdl-color-text--white'></div>
+        </a>
+      </div>
+      <nav class='mdl-navigation'>
+        <a href="/" class='mdl-navigation__link is-active fp-signed-in-only'><i class='material-icons'>home</i>Home</a>
+        <a href="/" class='mdl-navigation__link'><i class='material-icons'>trending_up</i>Feed</a>
+        <hr />
+        <a href="/about" class='mdl-navigation__link'><i class='material-icons'>perm_contact_calendar</i>About - Help - Contact</a>
+        <hr class='fp-signed-in-only'/>
+        <a href="" class='fp-sign-oout mdl-navigation__link fp-signed-in-only'><i class='material-icons'>exit_to_app</i>SignOut</a>
+      </nav>
+    </div>
+
+    <main class='mdl-layout__content mdl-color--grey-100'>
+      <section class='mdl-grid fp-content' id='page-feed' style='display:none;'>
+        <div class="fp-new-posts-button">
+          <button class='mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400'>
+            Show knew Posts.....
+          </button>
+        </div>
+        <div class="fp-image-container mdl-cell mdl-cell--12-col mdl-grid">
+          <div class="fp-no-posts fp-help mdl-card mdlshadow--2dp mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <i class='fp-info material-icons'>help</i>
+              <div>
+                <p>Start following people to see their posts!</p>
+                <p>
+                  Use the <strong><i class='material-icons'>search</i>search bar</strong> to find people you know and have a look at the <a href="/feed"><i class='material-icons'>trending_up</i> feed</a> to discover interesting people
+                </p>
+                <p>Then <i class='material-icons'>favorite</i> like and comment their posts!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fp-next-page-button">
+          <button class='mdl-button mdl-js-button mdl-button--raised mdl-button--fab'>
+            <i class='material-icons'>expand_more</i>
+          </button>
+        </div>
+      </section>
+
+      <section id='page-post' class='mdl-grid fp-content' style='display:none;'>
+        <div class="fp-image-container mdl-cell mdl-cell--12-col mdl-grid">
+          <div class="fp-post mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+              <div class="fp-header">
+                <a href="/user/" class='fp-usernamelink mdl-button mdl-js-button'>
+                  <div class='fp-avatar'></div>
+                  <div class='fp-username mdl-color-text--black'></div>
+                </a>
+                <button class='fp-delete-post mdl-button mdl-js-button'>Delete</button>
+                <a href="/post" class='fp-time'>now</a>
+              </div>
+              <div class="fp-image"></div>
+              <div class="fp-likes">0 likes</div>
+              <div class="fp-first-comment"></div>
+              <div class="fp-morecomments">View more comments....</div>
+              <div class="fp-comments"></div>
+              <div class="fp-action">
+                <span class='fp-like'>
+                  <div class='fp-not-liked material-icons'>favorite_border</div>
+                  <div class='fp-liked material-icons'>favorite</div>
+                </span>
+                <form action="#" class='fp-add-comment'>
+                  <div class="mdl-textfield mdl-js-textfield">
+                    <input type="text" class='mdl-textfield__input'>
+                    <label for="" class='mdl-textfield__label'>Comment.....</label>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id='page-about' class='mdl-grid fp-content' style='display:none;'>
+        <div class="fp-help mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--8-col-desktop">
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            <i class='fp-info material-icons'>info</i>
+            <div>
+              <p>Friendly Pix is a photo sharing app showcasing the use of the fb platform.</p>
+            </div>
+          </div>
+        </div>
+        <div class="fp-help mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--8-col-desktop">
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            <i class='fp-info material-icons'>help</i>
+            <div>
+              <p>Start following people to see their posts in your <a href="/"><i class='material-icons'>home</i></a>!</p>
+              <p>
+                use the <strong><i class='material-icons'>search </i>search bar</strong> to find people you know and have a llook at the <a href="/feed"><i class='material-icons'>trending_up</i>feed</a> to discover interesting people.
+              </p>
+              <p>Then <i class='material-icons'>favorite</i>like and comment their posts!</p>
+              <p>Share your pics with your friends using the <i class='material-icons'>file_upload</i>or <i class='material-icons'>photon_camera</i>Buttons</p>
+            </div>
+          </div>
+        </div>
+        <div class="fp-help mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--8-col-desktop">
+          <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+            <i class='fp-info material-icons'>contacts</i>
+            <div>
+              <p>Feel free to file issuse on mine github.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id='page-user-info' class='mdl-grid fp-content' style='display:none;'>
+        <div class="fp-user-container mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+          <div class="fp-user-avatar"></div>
+          <div class="fp-name-follow-container mdl-cell mdl-cell--5-col">
+            <div class="fp-username"></div>
+            <div class="fp-signed-in-only">
+              <label for="follow" class='fp-follow mdl-switch mdl-js-switch mdl-js-ripple-effect'>
+                <input type="checkbox" id='follow' class='mdl-switch__input' value='true'>
+                <span class="mdl-switch__label">Follow</span>
+              </label>
+            </div>
+            <div class="fp-user-detail-container">
+              <div class="fp-user-detail"><span class='fp-user-nbposts'>0</span>posts</div>
+              <div class="fp-user-detail"><span class='fp-user-nbfollowers'>0</span>followers</div>
+              <div class="fp-user-detail fp-user-nbfollowing-container"><span class='fp-user-nbfollowing'>0</span>following</div>
+            </div>
+          </div>
+        </div>
+        <div class="fp-user-following mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+          <button class='fp-close-following mdl-button mdl-js-button mdl-button--raised mdl-button--fab'>
+            <i class='material-icons'>expand_less</i>
+          </button>
+        </div>
+        <div class="fp-image-container mdl-cell mdlcell--12-col mdl-grid">
+          <div class="fp-no-posts mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop mdl-grid mdl-grid--no-spacing">
+            <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--8-col-desktop">
+              No Posts Yet!
+            </div>
+          </div>
+        </div>
+        <div class="fp-next-page-button">
+          <button class='mdl-button mdl-js-button mdl-button--raised mdl-button--fab'>
+            <i class='material-icons'>expand_more</i>
+          </button>
+        </div>
+      </section>
+
+      <section id='page-add' class='mdl-grid fp-content' style='display:none;'>
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing">
+          <div class="fp-addcontainer mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdlcell--12-col-desktop">
+            <div class="fp-overlay">
+              <i class='material-icons'>hourglass_full</i>
+            </div>
+            <img src="" id='newPictureContainer' alt="">
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+              <form action="#" id='uploadPicFprm'>
+                <div class="mdl-textfield mdl-js-textfield mdltextfield--floating-label">
+                  <input type="text" class='mdl-textfield__input' id='imageCaptionInput'>
+                  <label for="imageCaptionInput" class='mdl-textfield__label'>Image Caption....</label>
+                </div>
+                <br>
+                <button type='submit' class='fp-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color-amber-400'>Upload this PIC! </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="mdl-snackbar mdl-js-snackbar" aria-live='asserlive' aria-atomic='true' aria-relevant='text'>
+        <div class="mdl-snackbar__text"></div>
+        <button type='button' class='mdl-snackbar__action'></button>
+      </div>
+    </main>
+  </div>
+
+  <script src='/bower_components/page/page.js'></script>
+  <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='/bower_components/latinize/latinize.js'></script>
+  <script src='/bower_components/sweetalert/dist/sweetalert.min.js'></script>
+  <link rel="stylesheet" href="/bower_components/sweetalert/dist/sweetalert.css">
+
+  <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCtUEjFhZX_OTM7KXVpMQVzBZEmJijUnng",
+      authDomain: "toga.firebaseapp.com",
+      databaseURL: "https://toga.firebaseio.com",
+      storageBucket: "firebase-toga.appspot.com",
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/ui/live/0.4/firebase-ui-auth.js"></script>
+  <script type="text/javascript">
+    // FirebaseUI config.
+    var uiConfig = {
+      'signInSuccessUrl': '/',
+      'signInOptions': [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        firebase.auth.FacebookAuthProvider.PROVIDER_ID
+      ]
+    };
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    ui.start('#firebaseui-auth-container', uiConfig);
+  </script>
+
+  <script src="/lib/utils.js"></script>
+  <script src="/lib/firebase.js"></script>
+  <script src="/lib/auth.js"></script>
+  <script src="/lib/search.js"></script>
+  <script src="/lib/uploader.js"></script>
+  <script src="/lib/userpage.js"></script>
+  <script src="/lib/post.js"></script>
+  <script src="/lib/feed.js"></script>
+  <script src="/lib/routing.js"></script>
 
 </body>
 </html>
