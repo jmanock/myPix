@@ -1,0 +1,25 @@
+{
+  "name": "Chatterbox",
+  "description": "Angular chat application with Firebase backend",
+  "main": "app.js",
+  "authors": [
+    "Glen Cooney"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "chat"
+  ],
+  "homepage": "https://github.com/transplanar/Chatterbox",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-perfect-scrollbar": "^0.0.4",
+    "ng-scrollbar": "^0.0.8"
+  }
+}
