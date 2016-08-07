@@ -1,0 +1,95 @@
+#logo{
+  margin-left: 5%;
+  display: inline-block;
+  font-family: cursive;
+  color: #c2e1ff;
+}
+
+.newRoom {
+  position: relative;
+  bottom: 0.5em;
+  margin-left: 5%;
+}
+
+.side-bar {
+  position: fixed;
+  width: 32rem;
+  height: 100%;
+  overflow-y: scroll;
+  background-color: rgba(136, 136, 136, 1.0);
+}
+
+.test-container{
+  margin-left: 10%; margin-right: 10%;
+}
+
+.test-button{
+  display: inline-block;
+}
+
+.test-button + .test-button{
+  margin-right: 2%;
+}
+
+
+ul {
+  list-style: none;
+}
+
+li:before {
+  content: '\2022';
+  padding: 10px;
+}
+
+.room-selected{
+  font-weight: bolder;
+  font-size: 1.2em;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+}
+
+.room-list {
+/*  margin-top: 5%;*/
+  margin-left: 10%;
+}
+
+.room-list li{
+  max-width: 20rem;
+}
+
+.room-content{
+  position:relative;
+/*  display: block;*/
+/*  margin-top: 5%;*/
+/*  margin-left: 10%;*/
+/*  padding-left: 10%;*/
+/*  margin-left: 5%;*/
+/*  float:left;*/
+  left: 32rem;
+  margin-left: 1%;
+/*  display: inline-block;*/
+}
+
+.room-content h1{
+  margin-top: 0;
+}
+
+.msg-display{
+  margin-bottom: 2%;
+  margin-left: 1rem;
+}
+
+.msg-username{
+  font-weight: bold;
+}
+
+.messageInput{
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  margin-left: 34rem;
+}
+
+.messageInputbox{
+  width: 87%;
+  display: inline-block;
+}
