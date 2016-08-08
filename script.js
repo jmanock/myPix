@@ -1,6 +1,7 @@
 $(document).ready(function(){
     var forecast = 'http://api.wunderground.com/api/db467f1cecc63029/forecast/q/';
     var temp ='http://api.wunderground.com/api/db467f1cecc63029/geolookup/conditions/q/';
+    var something = 'http://api.sba.gov/geodata/city_links_for_state_of/fl.json';
 
     $('button').click(function(){
       /*
@@ -8,6 +9,7 @@ $(document).ready(function(){
         * call for a city look up
         * call a state look up
         * need to return a tem from another call
+        * maybe just one input where city state and zip can be entered
       */
       var city = $('.city').val();
       var state = $('.state').val().toUpperCase();
