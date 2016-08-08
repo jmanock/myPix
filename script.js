@@ -1,9 +1,14 @@
 $(document).ready(function(){
     var forecast = 'http://api.wunderground.com/api/db467f1cecc63029/forecast/q/';
+    var temp ='http://api.wunderground.com/api/db467f1cecc63029/geolookup/conditions/q/';
 
     $('button').click(function(){
-      // Should use another api to get states and cities
-      // maybe even use zip code
+      /*
+        * use a function
+        * call for a city look up
+        * call a state look up
+        * need to return a tem from another call
+      */
       var city = $('.city').val();
       var state = $('.state').val().toUpperCase();
       if(city !== '' && state !== ''){
@@ -12,12 +17,6 @@ $(document).ready(function(){
           url:knew,
           dataType:'jsonp',
           success:function(data){
-            /*
-              * Return temp
-              * Return prec % √
-              * Return image √
-              * Return conditions √
-            */
             var something = data.forecast.simpleforecast.forecastday[0];
             console.log(something);
             var pop = something.pop;
