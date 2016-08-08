@@ -1,10 +1,4 @@
 $(document).ready(function(){
-    /*
-      * Need to be able to put in state
-      * Need to be able to put in city
-      * Return temp
-      * Return rain %
-    */
     var forecast = 'http://api.wunderground.com/api/db467f1cecc63029/forecast/q/';
 
     $('button').click(function(){
@@ -18,7 +12,20 @@ $(document).ready(function(){
           url:knew,
           dataType:'jsonp',
           success:function(data){
-            console.log(data.forecast.simpleforecast.forecastday[0]);
+            /*
+              * Return temp
+              * Return prec % √
+              * Return image √
+              * Return conditions √
+            */
+            var something = data.forecast.simpleforecast.forecastday[0];
+            console.log(something);
+            var pop = something.pop;
+            var smile = something.icon_url;
+            var cond = something.conditions;
+            $('h1').append('<img src='+smile+' </img>');
+            $('h1').append('Today '+cond);
+            $('h1').append('Prep '+pop);
           }
         });
       }else{
