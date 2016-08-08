@@ -1,81 +1,9 @@
-<!-- <h1>HelloFriendWeather</h1>
+<h1>HelloFriendWeather</h1>
 <input type="text" placeholder='State' class='state'>
 <br>
 <input type="text" placeholder='City' class='city'>
 <br>
 <button type='submit'>Find</button>
+<input type="text" class='text'>
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script src='script.js'></script> -->
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>WeatherMe</title>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.0/jquery.js'></script>
-  <style>
-    input, label, select{
-      display:block;
-      width:100%;
-      margin:0;
-      width:150px;
-    }
-    body{
-      background-color:#eee;
-    }
-  </style>
-</head>
-<body>
-  <p>Enter yo zipcode and watch the city and state appear magiclly</p>
-  <form action="">
-    <label for="zip">Zip:</label>
-    <input type="numbers" id='zip' name='zip'>
-    <label for="city">City:</label>
-    <div id='city_wrap'><input type="text" name='city' id='city'></div>
-    <label for="state">State:</label>
-    <input type="text" name='state' id='state'>
-  </form>
-  <script>
-    $(document).ready(function(){
-      $('#zip').keyup(function(){
-        if($(this).val().length == 5){
-          var zip = $(this).val();
-          var city = '';
-          var state = '';
-          $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+zip).success(function(response){
-            var address_components = response.results[0].address_components;
-            $.each(address_components, function(index, component){
-              var types = component.types;
-              $.each(types, function(index, type){
-                if(type == 'locality'){
-                  city = component.long_name;
-                }
-                if(type == 'administrative_area_level_1'){
-                  state = component.short_name;
-                }
-              });
-            });
-            var cities = response.results[0].postcode_localities;
-            if(cities){
-              var $select = $(document.createElement('select'));
-              console.log(cities);
-              $.each(cities, function(index, locality){
-                var $option = $(document.createElement('option'));
-                $option.html(locality);
-                $option.attr('value', locality);
-                if(city == locality){
-                  $option.attr('selected', 'selected');
-                }
-                $select.append($option);
-              });
-              $select.attr('id', 'city');
-              $('#city_wrap').html($select);
-            }else{
-              $('#city').val(city);
-            }
-            $('#state').val(state);
-          });
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+<script src='script.js'></script>
