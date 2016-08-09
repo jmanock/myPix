@@ -10,15 +10,20 @@ $(document).ready(function(){
     // });
     $('button').click(function(){
       var kewl = $('.text').val();
-      $.getJSON(somethingKewl+kewl).success(function(data){
-        var dLength = data.results.length;
-        var results = data.results;
-        if(dLength > 1){
+      if(kewl.length < 3){
+        console.log('Please enter more letters');
+      }else{
+        $.getJSON(somethingKewl+kewl).success(function(data){
+          var results = data.results;
           $.each(results, function(i,x){
+            // Have to only get back the city and state
+            // Get rid of the zip and usa
+            // Check to see if there is anything there
             console.log(x.formatted_address);
           });
-        }
-      });
+        });
+      }
+
     });
 
     // $('button').click(function(){
