@@ -11,7 +11,7 @@ $(document).ready(function(){
     $('button').click(function(){
       var kewl = $('.text').val();
       $.getJSON(somethingKewl+kewl).success(function(data){
-        console.log(data);
+        console.log(data.results.length);
       });
     });
 
