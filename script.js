@@ -11,7 +11,13 @@ $(document).ready(function(){
     $('button').click(function(){
       var kewl = $('.text').val();
       $.getJSON(somethingKewl+kewl).success(function(data){
-        console.log(data.results.length);
+        var dLength = data.results.length;
+        var results = data.results;
+        if(dLength > 1){
+          $.each(results, function(i,x){
+            console.log(x.formatted_address);
+          });
+        }
       });
     });
 
