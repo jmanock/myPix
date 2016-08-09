@@ -20,6 +20,7 @@ $(document).ready(function(){
             // Get rid of the zip and usa
             // Check to see if there is anything there
             console.log(x.formatted_address);
+            $('body').append('<p>'+x.formatted_address+' </p>');
           });
         });
       }
