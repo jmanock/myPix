@@ -15,22 +15,13 @@ request(url, function(error, response, body){
       var url = $(imglink[i]).attr('href');
       console.log(i, something, url);
     }
-
-    // for(var j = 0; j<title.length; j++){
-    //   var something = $(title[j]).text();
-    //   //console.log(j, something);
-    // }
-    // imglink.each(function(i, link){
-    //   var url = $(link).attr('href');
-    //   //var something = $(link).text();
-    //   //console.log(i, something);
-    // });
-    // title.each(function(i,link){
-    //   var something = $(link).text();
-    //   // sexting.push(something);
-    // });
   }else{
     console.log('We fucked up or you fucked up');
   }
-  //console.log(sexting);
+
 });
+/*TODO
+  * Store links, be able to move to the next page
+  * Show pics
+  * Maybe open after window is closed
+*/
