@@ -1,0 +1,27 @@
+{
+  "name":"node-reddit-scraper",
+  "version":"0.0.1",
+  "main":"index.js",
+  "dependencies":{
+    "async":"^1.5.0",
+    "lodash":"^3.10.1",
+    "mkdirp":"^0.5.1",
+    "request":"^2.67.0",
+    "sanitize-filename":"^1.5.3",
+    "winston":"^0.9.0"
+  },
+  "devDependencies":{
+    "mocha":"^2.3.4",
+    "should":"^7.1.1"
+  },
+  "scripts":{
+    "run":"node index.js",
+    "test":"NODE_ENV=test mocha -R spec -b --recursive --timeout 20000"
+  },
+  "keywords":[
+    "reddit",
+    "scraper",
+    "node.js"
+  ],
+  "author":"me"
+}
