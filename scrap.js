@@ -6,8 +6,6 @@ request(url, function(error, response, body){
   if(!error && response.statusCode === 200){
     var $ = cheerio.load(body);
     var imglink = $('a.thumbnail.may-blank');
-
-    //var title = $('.title.may-blank.outbound');
     var title = $('.title .may-blank');
 
     for(var i = 0; i<imglink.length && i<title.length; i++){
@@ -20,8 +18,3 @@ request(url, function(error, response, body){
   }
 
 });
-/*TODO
-  * Store links, be able to move to the next page
-  * Show pics
-  * Maybe open after window is closed
-*/
