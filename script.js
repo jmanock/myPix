@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     var forecast = 'http://api.wunderground.com/api/db467f1cecc63029/forecast/q/';
     var temp ='http://api.wunderground.com/api/db467f1cecc63029/geolookup/conditions/q/';
