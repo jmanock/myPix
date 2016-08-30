@@ -30,16 +30,28 @@ prompt.get(['lastName'], function(err, result){
           * last name should get the link index -1
         */
         var knew = [];
-
+        var other = [];
         knew.push(lastName);
         for(var i = 0; i<secondLetterLookup.length; i++){
-          var something = $(secondLetterLookup[i]).attr('href');
+          var href = $(secondLetterLookup[i]).attr('href');
           var lastNameText = $(secondLetterLookup[i]).text();
           lastNameText = lastNameText.replace(/\r?\n|\r/g,"");
           knew.push(lastNameText);
+          other.push(href);
           knew.sort();
+          something(knew, other);
         }
-        console.log(knew);
+        var a;
+        function something(knew, href){
+          // I think i can sort the array then return the link
+          for(var i = 0; i<knew.length; i++){
+            if(knew[i] === lastName){
+              a = knew.indexOf(lastName);
+              a = href[a-1];
+            }
+          }
+        }
+        console.log(a);
     }
   });
 
