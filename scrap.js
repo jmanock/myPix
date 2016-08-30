@@ -14,12 +14,6 @@ var prompt = require('prompt');
 var url = 'http://www.flvoters.com';
 var addons = '/by_name/index_pages/';
 
-// request(url, function(error, response, body){
-//   if(!error && response.statusCode === 200){
-//     console.log(body);
-//   }
-// });
-
 prompt.start();
 /*
 
@@ -30,10 +24,18 @@ prompt.get(['lastName' ], function(err, result){
   var linkFl = url+addons+firstLetter+'.html';
   request(linkFl, function(error, response, body){
     if(!error && response.statusCode === 200){
-        // Now this needs to look up the rest of the name
         var $ = cheerio.load(body);
-        var secondLetterLookup = $('td a').text();
-        console.log(secondLetterLookup);
+        var secondLetterLookup = $('td a');
+        /*
+          - First lets return just last names
+        */
+        for(var i = 0; i<secondLetterLookup.length; i++){
+          // Returns url link
+          var something = $(secondLetterLookup[i]).attr('href');
+          // Returns text
+          var sels = $(secondLetterLookup[i]).text();
+          console.log(something, sels);
+        }
     }
   });
 
