@@ -26,9 +26,6 @@ prompt.get(['lastName'], function(err, result){
     if(!error && response.statusCode === 200){
         var $ = cheerio.load(body);
         var secondLetterLookup = $('td font a');
-        /*
-          * last name should get the link index -1
-        */
         var knew = [];
         var other = [];
         knew.push(lastName);
@@ -39,20 +36,19 @@ prompt.get(['lastName'], function(err, result){
           knew.push(lastNameText);
           other.push(href);
           knew.sort();
-          something(knew, other);
         }
-        var a;
-        function something(knew, href){
-          // I think i can sort the array then return the link
-          for(var i = 0; i<knew.length; i++){
-            if(knew[i] === lastName){
-              a = knew.indexOf(lastName);
-              a = href[a-1];
-            }
-          }
-        }
-        console.log(a);
+        something(knew, other);
     }
+    var a;
+    function something(knew, href){
+      for(var i = 0; i<knew.length; i++){
+        if(knew[i] === lastName){
+          a = knew.indexOf(lastName);
+          a = href[a-1];
+        }
+      }
+    }
+    console.log(a);
   });
 
 });
