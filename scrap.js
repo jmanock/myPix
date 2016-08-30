@@ -27,9 +27,10 @@ prompt.get(['lastName'], function(err, result){
         var $ = cheerio.load(body);
         var secondLetterLookup = $('td font a');
         /*
-          * Have to add the last name to the array too
+          * last name should get the link index -1
         */
         var knew = [];
+
         knew.push(lastName);
         for(var i = 0; i<secondLetterLookup.length; i++){
           var something = $(secondLetterLookup[i]).attr('href');
@@ -39,7 +40,6 @@ prompt.get(['lastName'], function(err, result){
           knew.sort();
         }
         console.log(knew);
-
     }
   });
 
