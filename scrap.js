@@ -16,9 +16,9 @@ var addons = '/by_name/index_pages/';
 
 prompt.start();
 /*
-
+  - only text check
 */
-prompt.get(['lastName' ], function(err, result){
+prompt.get(['lastName'], function(err, result){
   // Take the first letter
   var firstLetter = result.lastName.charAt(0);
   var linkFl = url+addons+firstLetter+'.html';
@@ -33,8 +33,11 @@ prompt.get(['lastName' ], function(err, result){
           // Returns url link
           var something = $(secondLetterLookup[i]).attr('href');
           // Returns text
-          var sels = $(secondLetterLookup[i]).text();
-          console.log(something, sels);
+          // Dont need this to show
+          // Need an if statment to see where the name falls
+          var lastNameText = $(secondLetterLookup[i]).text();
+          lastNameText = lastNameText.substring(0, lastNameText.indexOf(','));
+          // Need to keep them paired together to go to the next page
         }
     }
   });
