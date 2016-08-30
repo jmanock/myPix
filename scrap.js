@@ -1,12 +1,5 @@
 /* TODO
-  * Search box
-    - Dynamicly searches names
-    - Pulls up info
-    - Have to select the right name
-  * Google Maps
-  * FIRST STEPS
-    - Make a search box that does something
-    - Make the search box tie in with node
+  *
 */
 var request = require('request');
 var cheerio = require('cheerio');
@@ -16,15 +9,17 @@ var addons = '/by_name/index_pages/';
 
 prompt.start();
 
-prompt.get(['lastName'], function(err, result){
+prompt.get(['LastName','FirstName'], function(err, result){
 
-  var lastName = result.lastName.toUpperCase();
-  var firstLetter = result.lastName.charAt(0);
+  var lastName = result.LastName.toUpperCase();
+  var firstName = result.FirstName.toUpperCase();
+  var fullName = lastName + ', '+firstName;
+  var firstLetter = result.LastName.charAt(0);
   var linkFl = url+addons+firstLetter+'.html';
-
+console.log(fullName);
   request(linkFl, function(error, response, body){
     if(!error && response.statusCode === 200){
-      // THIS NEEDS TO BE A FUNCTION
+
         var $ = cheerio.load(body);
         var secondLetterLookup = $('td font a');
         var knew = [];
@@ -58,7 +53,7 @@ prompt.get(['lastName'], function(err, result){
           var mine = $(something[i]).text();
           mine = mine.replace(/\r?\n|\r/g,"");
           mix.push(mine);
-          console.log(i,mine);
+
         }
 
       }
