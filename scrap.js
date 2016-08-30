@@ -25,20 +25,25 @@ prompt.get(['lastName'], function(err, result){
   request(linkFl, function(error, response, body){
     if(!error && response.statusCode === 200){
         var $ = cheerio.load(body);
-        var secondLetterLookup = $('td a');
+        var secondLetterLookup = $('td font a');
         /*
-          - First lets return just last names
+          * Have to add the last name to the array too
+          * Should be an if statment somewhere
+          * Return only the array index -1 of the return?
+          * Remove the home page link
         */
+        var knew = [];
         for(var i = 0; i<secondLetterLookup.length; i++){
           // Returns url link
+
           var something = $(secondLetterLookup[i]).attr('href');
-          // Returns text
-          // Dont need this to show
-          // Need an if statment to see where the name falls
           var lastNameText = $(secondLetterLookup[i]).text();
-          lastNameText = lastNameText.substring(0, lastNameText.indexOf(','));
-          // Need to keep them paired together to go to the next page
+          lastNameText = lastNameText.replace(/\r?\n|\r/g,"");
+          knew.push(lastNameText);
+          knew.sort();
         }
+        console.log(knew);
+
     }
   });
 
