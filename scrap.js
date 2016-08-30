@@ -19,7 +19,7 @@ prompt.start();
   - only text check
 */
 prompt.get(['lastName'], function(err, result){
-  // Take the first letter
+  var lastName = result.lastName.toUpperCase();
   var firstLetter = result.lastName.charAt(0);
   var linkFl = url+addons+firstLetter+'.html';
   request(linkFl, function(error, response, body){
@@ -28,14 +28,10 @@ prompt.get(['lastName'], function(err, result){
         var secondLetterLookup = $('td font a');
         /*
           * Have to add the last name to the array too
-          * Should be an if statment somewhere
-          * Return only the array index -1 of the return?
-          * Remove the home page link
         */
         var knew = [];
+        knew.push(lastName);
         for(var i = 0; i<secondLetterLookup.length; i++){
-          // Returns url link
-
           var something = $(secondLetterLookup[i]).attr('href');
           var lastNameText = $(secondLetterLookup[i]).text();
           lastNameText = lastNameText.replace(/\r?\n|\r/g,"");
