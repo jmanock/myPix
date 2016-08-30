@@ -15,15 +15,16 @@ var url = 'http://www.flvoters.com';
 var addons = '/by_name/index_pages/';
 
 prompt.start();
-/*
-  - only text check
-*/
+
 prompt.get(['lastName'], function(err, result){
+
   var lastName = result.lastName.toUpperCase();
   var firstLetter = result.lastName.charAt(0);
   var linkFl = url+addons+firstLetter+'.html';
+
   request(linkFl, function(error, response, body){
     if(!error && response.statusCode === 200){
+      // THIS NEEDS TO BE A FUNCTION
         var $ = cheerio.load(body);
         var secondLetterLookup = $('td font a');
         var knew = [];
@@ -37,10 +38,10 @@ prompt.get(['lastName'], function(err, result){
           other.push(href);
           knew.sort();
         }
-        something(knew, other);
+        nextPage(knew, other);
     }
     var a;
-    function something(knew, href){
+    function nextPage(knew, href){
       for(var i = 0; i<knew.length; i++){
         if(knew[i] === lastName){
           a = knew.indexOf(lastName);
@@ -48,7 +49,20 @@ prompt.get(['lastName'], function(err, result){
         }
       }
     }
-    console.log(a);
+    request(a, function(error, response, body){
+      if(!error && response.statusCode === 200){
+        var $ = cheerio.load(body);
+        var something = $('td font a');
+        var mix = [];
+        for(var i = 0; i<something.length; i++){
+          var mine = $(something[i]).text();
+          mine = mine.replace(/\r?\n|\r/g,"");
+          mix.push(mine);
+          console.log(i,mine);
+        }
+
+      }
+    });
   });
 
 });
