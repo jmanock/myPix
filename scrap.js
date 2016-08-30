@@ -22,21 +22,19 @@ var addons = '/by_name/index_pages/';
 
 prompt.start();
 /*
-  * take the first letter of the last name print out the url
+
 */
 prompt.get(['lastName' ], function(err, result){
   // Take the first letter
   var firstLetter = result.lastName.charAt(0);
-  var something = url+addons+firstLetter+'.html';
-  request(something, function(error, response, body){
+  var linkFl = url+addons+firstLetter+'.html';
+  request(linkFl, function(error, response, body){
     if(!error && response.statusCode === 200){
-      console.log('Wow you are smart');
-    }else{
-      console.log('No you really are stupid');
+        // Now this needs to look up the rest of the name
+        var $ = cheerio.load(body);
+        var secondLetterLookup = $('td a').text();
+        console.log(secondLetterLookup);
     }
   });
-
-  // console.log('FirstName: '+result.firstName);
-  // console.log('LastName: '+result.lastName);
 
 });
