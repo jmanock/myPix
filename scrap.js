@@ -24,7 +24,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
     var namesArray = [];
     var hrefsArray = [];
 
-    namesArray.push(lastName);
+    namesArray.push(fullName);
 
     for(var i = 0; i<namesLookUp.length; i++){
       var hrefs = $(namesLookUp[i]).attr('href');
@@ -34,26 +34,27 @@ prompt.get(['LastName','FirstName'], function(err, result){
       hrefsArray.push(hrefs);
       namesArray.sort();
     }
+    console.log(namesArray);
     // This needs to check what page i am on
     if(namesArray.length < 100){
       nextPage(namesArray,hrefsArray);
     }else{
-      console.log(namesArray);
+      console.log(namesArray.length);
     }
-
   }
   var a;
   function nextPage(namesArray,hrefsArray){
     for(var i = 0; i<namesArray.length; i++){
-      if(namesArray[i] === lastName){
-        a = namesArray.indexOf(lastName);
+      if(namesArray[i] === fullName){
+        a = namesArray.indexOf(fullName);
         a = hrefsArray[a-1];
       }
     }
+    console.log(a);
     request(a, function(err,response,body){
       if(!err && response.statusCode === 200){
         doWork(body);
       }
-    })
+    });
   }
 });
