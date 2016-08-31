@@ -34,24 +34,26 @@ prompt.get(['LastName','FirstName'], function(err, result){
       hrefsArray.push(hrefs);
       namesArray.sort();
     }
-    console.log(namesArray);
-    // This needs to check what page i am on
-    if(namesArray.length < 100){
+
+    // This should go from page two to page three
+    if(namesArray.length < 202){
       nextPage(namesArray,hrefsArray);
     }else{
-      console.log(namesArray.length);
+      // This should go to the last page
+      console.log(namesArray);
     }
   }
-  var a;
+
+  var call;
   function nextPage(namesArray,hrefsArray){
     for(var i = 0; i<namesArray.length; i++){
       if(namesArray[i] === fullName){
-        a = namesArray.indexOf(fullName);
-        a = hrefsArray[a-1];
+        call = namesArray.indexOf(fullName);
+        call = hrefsArray[call-1];
       }
     }
-    console.log(a);
-    request(a, function(err,response,body){
+
+    request(call, function(err,response,body){
       if(!err && response.statusCode === 200){
         doWork(body);
       }
