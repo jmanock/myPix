@@ -34,7 +34,13 @@ prompt.get(['LastName','FirstName'], function(err, result){
       hrefsArray.push(hrefs);
       namesArray.sort();
     }
-    nextPage(namesArray,hrefsArray);
+    // This needs to check what page i am on
+    if(namesArray.length < 100){
+      nextPage(namesArray,hrefsArray);
+    }else{
+      console.log(namesArray);
+    }
+
   }
   var a;
   function nextPage(namesArray,hrefsArray){
@@ -44,6 +50,10 @@ prompt.get(['LastName','FirstName'], function(err, result){
         a = hrefsArray[a-1];
       }
     }
-    console.log(a);
+    request(a, function(err,response,body){
+      if(!err && response.statusCode === 200){
+        doWork(body);
+      }
+    })
   }
 });
