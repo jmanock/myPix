@@ -39,8 +39,13 @@ prompt.get(['LastName','FirstName'], function(err, result){
     if(namesArray.length < 202){
       nextPage(namesArray,hrefsArray);
     }else{
-      // This should go to the last page
-      console.log(namesArray);
+      /*
+        * Get rid of next home prev
+        * Get rid of the long list before name
+        * Think of a way to have the middle name not count for a match
+      */
+
+      filterNames(namesArray);
     }
   }
 
@@ -58,5 +63,24 @@ prompt.get(['LastName','FirstName'], function(err, result){
         doWork(body);
       }
     });
+  }
+  function filterNames(namesArray){
+    var cutString;
+    var knew = [];
+    for(var i = 0; i<namesArray.length; i++){
+      if(namesArray[i].length > 27){
+        cutString = namesArray[i].slice(26);
+        knew.push(cutString);
+      }else if(namesArray[i] === 'Home Page' || namesArray[i] === 'Next Page' || namesArray[i] === 'Previous Page'){
+        // remove these links
+        //console.log('we have something');
+      }else{
+        // push everything else
+        knew.push(namesArray[i]);
+      }
+
+    }
+    console.log(knew);
+
   }
 });
