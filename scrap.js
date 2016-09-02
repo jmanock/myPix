@@ -10,6 +10,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
   var lastName = result.LastName.toUpperCase();
   var firstName = result.FirstName.toUpperCase();
   var fullName = lastName + ', '+firstName;
+  var otherFullName = firstName + ' ' + lastName;
   var firstLetter = result.LastName.charAt(0);
   var linkFl = url + addons + firstLetter+'.html';
 
@@ -40,7 +41,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
       nextPage(namesArray,hrefsArray);
     }else{
       /*
-        * Get rid of next home prev
+
         * Get rid of the long list before name
         * Think of a way to have the middle name not count for a match
       */
@@ -71,15 +72,17 @@ prompt.get(['LastName','FirstName'], function(err, result){
       if(namesArray[i].length > 27){
         cutString = namesArray[i].slice(26);
         knew.push(cutString);
-      }else if(namesArray[i] === 'Home Page' || namesArray[i] === 'Next Page' || namesArray[i] === 'Previous Page'){
-        // remove these links
-        //console.log('we have something');
+      }else if(namesArray[i] === 'Next page' || namesArray[i] === 'Home page' || namesArray[i] === 'Previous page' || namesArray[i] === fullName){
+        // This needs to remove the links
+
       }else{
-        // push everything else
-        knew.push(namesArray[i]);
+        cutString = namesArray[i];
+        knew.push(cutString);
       }
 
     }
+    knew.push(otherFullName);
+    knew.sort();
     console.log(knew);
 
   }
