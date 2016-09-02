@@ -70,7 +70,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
     var knew = [];
     for(var i = 0; i<namesArray.length; i++){
       if(namesArray[i].length > 27){
-        cutString = namesArray[i].slice(26);
+        cutString = namesArray[i].slice(27);
         knew.push(cutString);
       }else if(namesArray[i] === 'Next page' || namesArray[i] === 'Home page' || namesArray[i] === 'Previous page' || namesArray[i] === fullName){
         // This needs to remove the links
@@ -81,6 +81,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
       }
 
     }
+    // Have to get rid of the white space in front of the names
     knew.push(otherFullName);
     knew.sort();
     console.log(knew);
