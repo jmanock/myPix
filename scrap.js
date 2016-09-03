@@ -44,6 +44,8 @@ prompt.get(['LastName','FirstName'], function(err, result){
 
         * Get rid of the long list before name
         * Think of a way to have the middle name not count for a match
+        *BUG
+        - Two different names show up for some reason
       */
 
       filterNames(namesArray);
@@ -84,7 +86,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
     // Have to get rid of the white space in front of the names
     knew.push(otherFullName);
     knew.sort();
-    console.log(knew);
+    //console.log(knew);
 
   }
 });
