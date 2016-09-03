@@ -33,6 +33,7 @@ prompt.get(['LastName', 'FirstName'], function(err, result){
       namesArray.push(lastNamesList);
       hrefsArray.push(hrefs);
       namesArray.sort();
+      //console.log(i,namesArray[i]);
     }
     if(namesArray.length < 200){
       nextPage(namesArray, hrefsArray);
@@ -44,8 +45,10 @@ prompt.get(['LastName', 'FirstName'], function(err, result){
   }
   function helpMe(namesArray, hrefsArray){
     for(var i = 0; i<namesArray.length; i++){
-      console.log(namesArray[i]);
-      console.log(hrefsArray[i]);
+      if(namesArray[i] === fullName){
+        console.log(i, namesArray[i]);
+      }
+      console.log(i,namesArray[i]);
     }
   }
 
