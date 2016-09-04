@@ -46,9 +46,16 @@ prompt.get(['LastName', 'FirstName'], function(err, result){
   }
   function helpMe(namesArray, hrefsArray){
     for(var i = 0; i<namesArray.length; i++){
+      // Need to just add fullName
+      // Do not want it sorted
+      if(fullName < namesArray[i]){
+        console.log('HelloFriend');
+      }
       console.log(i,namesArray[i]);
     }
+
   }
+
 
   var call;
 
