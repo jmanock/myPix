@@ -33,11 +33,13 @@ prompt.get(['LastName', 'FirstName'], function(err, result){
       namesArray.push(lastNamesList);
       hrefsArray.push(hrefs);
       namesArray.sort();
-      //console.log(i,namesArray[i]);
+
+      // Need to find away to only add name not resort the array
+      // Maybe a rule if there is a space not `-`??
     }
     if(namesArray.length < 200){
       nextPage(namesArray, hrefsArray);
-      // For some reason its opening the wrong page for bf
+      // FIgured it out sort is not looking at commas
     }else{
       //filterNames(namesArray);
       helpMe(namesArray, hrefsArray);
