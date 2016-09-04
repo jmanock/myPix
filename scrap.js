@@ -75,43 +75,34 @@ prompt.get(['LastName','FirstName'], function(err, result){
   }
   function filterNames(body){
     /*
-      * Would like to return dob with name link
+      * Better Way
+        * Return the list of 10 - 20 names that could be the one
+          - Maybe return fullName and otherFullName as list
+        * Request that page
+          * return dob and address from request page
+          * link to click to google maps
+      * Need to figure out how to not look at the middle name
+      * Print to page
+      * google maps
     */
-    var knew = [];
+    var finalNamesArray = [];
     var $ = cheerio.load(body);
     var namesLookUp = $('td font a');
-    var something;
-    var bbody = $('font');
-
-    bbody.contents().filter(function(){
-      return this.nodeType == 8;
-    }).each(function(i,e){
-      //console.log(i,e.nodeValue);
-      // This could get id number with name
-      // not sure how i can get dob out of this
-      if(e.nodeValue === ' END '){
-
-      }else{
-         console.log(e.nodeValue);
-        //console.log(e);
-      }
-    });
+    var cutString;
 
     for(var i = 0; i<namesLookUp.length; i++){
-      something = $(namesLookUp[i]).text();
-      something = something.slice(27);
-      knew.push(something);
+      cutString = $(namesLookUp[i]).text();
+      if(cutString.length > 26){
+        cutString = cutString.slice(27);
+        finalNamesArray.push(cutString);
+      }
     }
+    finalNamesArray.push(otherFullName);
+    finalNamesArray.sort();
+    console.log(finalNamesArray);
   }
 
   function ilterNames(namesArray){
-    /*
-      * First a list of names
-      * Maybe show the dob?
-      * Add the otherFullName
-      * Get the list down to < 10 names
-        * Make sure they dont look at middle names
-    */
     var cutString;
     var knew = [];
     for(var i = 0; i<namesArray.length; i++){
