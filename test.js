@@ -49,9 +49,10 @@ prompt.get(['LastName', 'FirstName'], function(err, result){
       if(fullName < namesArray[i]){
         // The first time its added find the index
         // Have to remove the name first
+        
         return console.log(hrefsArray[i-2], namesArray[i]);
       }
-      console.log(i,namesArray[i]);
+
     }
 
   }

@@ -82,11 +82,19 @@ prompt.get(['LastName','FirstName'], function(err, result){
     var namesLookUp = $('td font a');
     var something;
     var bbody = $('font');
+
     bbody.contents().filter(function(){
-      console.log('not sure what this does');
       return this.nodeType == 8;
     }).each(function(i,e){
-      console.log(i,e.nodeValue,e);
+      //console.log(i,e.nodeValue);
+      // This could get id number with name
+      // not sure how i can get dob out of this
+      if(e.nodeValue === ' END '){
+
+      }else{
+         console.log(e.nodeValue);
+        //console.log(e);
+      }
     });
 
     for(var i = 0; i<namesLookUp.length; i++){
