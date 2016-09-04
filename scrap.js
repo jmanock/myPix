@@ -70,15 +70,25 @@ prompt.get(['LastName','FirstName'], function(err, result){
         var call = hrefsArray[i-2];
         return request(call, function(err,response, body){
           if(!err && response.statusCode === 200){
-            doWork(body);
+            trySomethingKnew(body);
+            //doWork(body);
           }
         });
       }
     }
   }
+  function trySomethingKnew(body){
+    var $ = cheerio.load(body);
+    var namesLookUp = $('td font a');
+
+    for(var i = 0; i<namesLookUp.length; i++){
+        console.log($(namesLookUp[i]).text());
+    }
+  }
   function filterNames(namesArray){
     /*
       * First a list of names
+      * Maybe show the dob?
       * Add the otherFullName
       * Get the list down to < 10 names
         * Make sure they dont look at middle names
