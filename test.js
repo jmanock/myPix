@@ -45,11 +45,11 @@ prompt.get(['LastName', 'FirstName'], function(err, result){
     }
   }
   function helpMe(namesArray, hrefsArray){
-    for(var i = 0; i<namesArray.length; i++){
-      // Need to just add fullName
-      // Do not want it sorted
+    for(var i = 0; i<namesArray.length && i<hrefsArray.length; i++){
       if(fullName < namesArray[i]){
-        console.log('HelloFriend');
+        // The first time its added find the index
+        // Have to remove the name first
+        return console.log(hrefsArray[i-2], namesArray[i]);
       }
       console.log(i,namesArray[i]);
     }
