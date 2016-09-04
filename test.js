@@ -32,12 +32,11 @@ prompt.get(['LastName', 'FirstName'], function(err, result){
       lastNamesList = lastNamesList.replace(/\r?\n|r/g,"");
       namesArray.push(lastNamesList);
       hrefsArray.push(hrefs);
-      namesArray.sort();
 
-      // Need to find away to only add name not resort the array
-      // Maybe a rule if there is a space not `-`??
     }
+
     if(namesArray.length < 200){
+      namesArray.sort();
       nextPage(namesArray, hrefsArray);
       // FIgured it out sort is not looking at commas
     }else{
@@ -47,9 +46,6 @@ prompt.get(['LastName', 'FirstName'], function(err, result){
   }
   function helpMe(namesArray, hrefsArray){
     for(var i = 0; i<namesArray.length; i++){
-      if(namesArray[i] === fullName){
-        console.log(i, namesArray[i]);
-      }
       console.log(i,namesArray[i]);
     }
   }
