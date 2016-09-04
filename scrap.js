@@ -38,12 +38,8 @@ prompt.get(['LastName','FirstName'], function(err, result){
 
     if(namesArray.length < 200){
       nextPage(namesArray,hrefsArray);
-    }else if(namesArray.length < 300){
-      // This should fix the stupid bug fix
-      lastPage(namesArray,hrefsArray);
     }else{
-      filterNames(namesArray);
-      console.log(namesArray.length);
+      lastPage(namesArray,hrefsArray);
     }
   }
 
@@ -70,22 +66,37 @@ prompt.get(['LastName','FirstName'], function(err, result){
         var call = hrefsArray[i-2];
         return request(call, function(err,response, body){
           if(!err && response.statusCode === 200){
-            trySomethingKnew(body);
+            filterNames(body);
             //doWork(body);
           }
         });
       }
     }
   }
-  function trySomethingKnew(body){
+  function filterNames(body){
+    /*
+      * Would like to return dob with name link
+    */
+    var knew = [];
     var $ = cheerio.load(body);
     var namesLookUp = $('td font a');
+    var something;
+    var bbody = $('font');
+    bbody.contents().filter(function(){
+      console.log('not sure what this does');
+      return this.nodeType == 8;
+    }).each(function(i,e){
+      console.log(i,e.nodeValue,e);
+    });
 
     for(var i = 0; i<namesLookUp.length; i++){
-        console.log($(namesLookUp[i]).text());
+      something = $(namesLookUp[i]).text();
+      something = something.slice(27);
+      knew.push(something);
     }
   }
-  function filterNames(namesArray){
+
+  function ilterNames(namesArray){
     /*
       * First a list of names
       * Maybe show the dob?
