@@ -78,41 +78,44 @@ prompt.get(['LastName','FirstName'], function(err, result){
 
   function filterNames(body){
     var finalNamesArray = [];
+    var finalHrefsArray = [];
     var $ = cheerio.load(body);
     var namesLookUp = $('td font a');
+    var hrefsLookUp;
     var cutString;
 
     for(var i = 0; i<namesLookUp.length; i++){
+      hrefsLookUp = $(namesLookUp[i]).attr('href');
       cutString = $(namesLookUp[i]).text();
       cutString = cutString.toLowerCase();
       if(cutString.length > 26){
         cutString = cutString.slice(27);
         finalNamesArray.push(cutString);
       }
+      finalHrefsArray.push(hrefsLookUp);
     }
-    finalNamesArray.push(otherFullName);
+    //finalNamesArray.push(otherFullName);
     finalNamesArray.sort();
 
-    enders(finalNamesArray);
+    enders(finalNamesArray, finalHrefsArray);
   }
-  function enders(finalNamesArray){
-    /*
-      * Could check the first name vs length
-      * Could check the last name vs length
-    */
-    var hits = 0;
+  function enders(finalNamesArray, finalHrefsArray){
     var firstNameCheck;
     var lastNameCheck;
-    for(var i = 0; i<finalNamesArray.length; i++){
+
+    for(var i = 0; i<finalNamesArray.length && i<finalHrefsArray.length; i++){
+
       firstNameCheck = finalNamesArray[i].slice(0,lowerFirstName.length);
       lastNameCheck = finalNamesArray[i].slice(-lowerLastName.length);
 
       if(firstNameCheck === lowerFirstName && lastNameCheck === lowerLastName){
-        hits += 1;
-        // This should send it to another request page
+        // This need to send the results to a new request
+        // Need to get the href tags
+
         console.log(finalNamesArray[i]);
+        console.log(finalHrefsArray[i]);
       }
+
     }
-    console.log(hits);
   }
 });
