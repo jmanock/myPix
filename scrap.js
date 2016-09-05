@@ -97,9 +97,9 @@ prompt.get(['LastName','FirstName'], function(err, result){
     //finalNamesArray.push(otherFullName);
     finalNamesArray.sort();
 
-    enders(finalNamesArray, finalHrefsArray);
+    checkersFinal(finalNamesArray, finalHrefsArray);
   }
-  function enders(finalNamesArray, finalHrefsArray){
+  function checkersFinal(finalNamesArray, finalHrefsArray){
     var firstNameCheck;
     var lastNameCheck;
 
@@ -109,13 +109,12 @@ prompt.get(['LastName','FirstName'], function(err, result){
       lastNameCheck = finalNamesArray[i].slice(-lowerLastName.length);
 
       if(firstNameCheck === lowerFirstName && lastNameCheck === lowerLastName){
-        // This need to send the results to a new request
-        // Need to get the href tags
-
-        console.log(finalNamesArray[i]);
-        console.log(finalHrefsArray[i]);
+        namesInfo(finalNamesArray[i], finalHrefsArray[i]);
       }
-
     }
+  }
+  function namesInfo(namesArray, hrefsArray){
+    console.log(namesArray);
+    console.log(hrefsArray);
   }
 });
