@@ -9,6 +9,8 @@ prompt.start();
 prompt.get(['LastName','FirstName'], function(err, result){
   var lastName = result.LastName.toUpperCase();
   var firstName = result.FirstName.toUpperCase();
+  var lowerFirstName = result.FirstName.toLowerCase();
+  var lowerLastName = result.LastName.toLowerCase();
   var fullName = lastName + ', '+firstName;
   var otherFullName = result.FirstName + ' ' + result.LastName;
   var firstLetter = result.LastName.charAt(0);
@@ -99,16 +101,18 @@ prompt.get(['LastName','FirstName'], function(err, result){
       * Could check the last name vs length
     */
     var hits = 0;
-    var somethingFirst;
-    var somethingLast;
+    var firstNameCheck;
+    var lastNameCheck;
     for(var i = 0; i<finalNamesArray.length; i++){
-      // Need to make sure its front and back
-      somethingFirst = finalNamesArray[i].slice(0,firstName.length);
-      if(somethingFirst === result.FirstName){
-        console.log('Winner winner chicken dinner');
-      }else{
-        console.log(somethingFirst);
+      firstNameCheck = finalNamesArray[i].slice(0,lowerFirstName.length);
+      lastNameCheck = finalNamesArray[i].slice(-lowerLastName.length);
+
+      if(firstNameCheck === lowerFirstName && lastNameCheck === lowerLastName){
+        hits += 1;
+        // This should send it to another request page
+        console.log(finalNamesArray[i]);
       }
     }
+    console.log(hits);
   }
 });
