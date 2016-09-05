@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/jmanock/myPix#readme",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "cheerio": "^0.22.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "multer": "^1.2.0",
     "prompt": "^1.0.0",
     "request": "^2.74.0"
   }

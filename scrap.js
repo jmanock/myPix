@@ -119,7 +119,6 @@ prompt.get(['LastName','FirstName'], function(err, result){
   }
   function namesInfo(namesArray, hrefsArray){
     /*
-      * Return dob
       * Get an address back
       * if statment with sex offender
       * Need to get rid of prompt
