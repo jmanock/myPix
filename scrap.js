@@ -95,15 +95,20 @@ prompt.get(['LastName','FirstName'], function(err, result){
   }
   function enders(finalNamesArray){
     /*
-      * Need to find the names without middle names
+      * Could check the first name vs length
+      * Could check the last name vs length
     */
     var hits = 0;
+    var somethingFirst;
+    var somethingLast;
     for(var i = 0; i<finalNamesArray.length; i++){
-      if(finalNamesArray[i] === otherFullName){
-        hits += 1;
+      // Need to make sure its front and back
+      somethingFirst = finalNamesArray[i].slice(0,firstName.length);
+      if(somethingFirst === result.FirstName){
+        console.log('Winner winner chicken dinner');
+      }else{
+        console.log(somethingFirst);
       }
-
     }
-    console.log(hits);
   }
 });
