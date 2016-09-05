@@ -73,18 +73,8 @@ prompt.get(['LastName','FirstName'], function(err, result){
       }
     }
   }
+
   function filterNames(body){
-    /*
-      * Better Way
-        * Return the list of 10 - 20 names that could be the one
-          - Maybe return fullName and otherFullName as list
-        * Request that page
-          * return dob and address from request page
-          * link to click to google maps
-      * Need to figure out how to not look at the middle name
-      * Print to page
-      * google maps
-    */
     var finalNamesArray = [];
     var $ = cheerio.load(body);
     var namesLookUp = $('td font a');
@@ -100,10 +90,20 @@ prompt.get(['LastName','FirstName'], function(err, result){
     }
     finalNamesArray.push(otherFullName);
     finalNamesArray.sort();
-    // Need to send this to another function
+
     enders(finalNamesArray);
   }
   function enders(finalNamesArray){
-    console.log(finalNamesArray);
+    /*
+      * Need to find the names without middle names
+    */
+    var hits = 0;
+    for(var i = 0; i<finalNamesArray.length; i++){
+      if(finalNamesArray[i] === otherFullName){
+        hits += 1;
+      }
+
+    }
+    console.log(hits);
   }
 });
