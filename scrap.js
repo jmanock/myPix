@@ -95,7 +95,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
       finalHrefsArray.push(hrefsLookUp);
     }
     //finalNamesArray.push(otherFullName);
-    finalNamesArray.sort();
+    //finalNamesArray.sort();
 
     checkersFinal(finalNamesArray, finalHrefsArray);
   }
@@ -114,7 +114,14 @@ prompt.get(['LastName','FirstName'], function(err, result){
     }
   }
   function namesInfo(namesArray, hrefsArray){
-    console.log(namesArray);
-    console.log(hrefsArray);
+    request(hrefsArray, function(err, response, body){
+      if(!err && response.statusCode === 200){
+        var $ = cheerio.load(body);
+        var title = $('title').text();
+        var font = $('font').text();
+        font = font.slice(0,130);
+        console.log(title);
+      }
+    });
   }
 });
