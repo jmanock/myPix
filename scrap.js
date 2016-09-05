@@ -114,12 +114,17 @@ prompt.get(['LastName','FirstName'], function(err, result){
     }
   }
   function namesInfo(namesArray, hrefsArray){
+    /*
+      * Return dob
+      * Get an address back
+      * if statment with sex offender
+    */
     request(hrefsArray, function(err, response, body){
       if(!err && response.statusCode === 200){
         var $ = cheerio.load(body);
         var title = $('title').text();
         var font = $('font').text();
-        font = font.slice(0,130);
+        font = font.slice(24,130);
         console.log(title);
       }
     });
