@@ -10,7 +10,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
   var lastName = result.LastName.toUpperCase();
   var firstName = result.FirstName.toUpperCase();
   var fullName = lastName + ', '+firstName;
-  var otherFullName = firstName + ' ' + lastName;
+  var otherFullName = result.FirstName + ' ' + result.LastName;
   var firstLetter = result.LastName.charAt(0);
   var linkFl = url + addons + firstLetter+'.html';
 
@@ -92,6 +92,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
 
     for(var i = 0; i<namesLookUp.length; i++){
       cutString = $(namesLookUp[i]).text();
+      cutString = cutString.toLowerCase();
       if(cutString.length > 26){
         cutString = cutString.slice(27);
         finalNamesArray.push(cutString);
@@ -99,29 +100,10 @@ prompt.get(['LastName','FirstName'], function(err, result){
     }
     finalNamesArray.push(otherFullName);
     finalNamesArray.sort();
-    console.log(finalNamesArray);
+    // Need to send this to another function
+    enders(finalNamesArray);
   }
-
-  function ilterNames(namesArray){
-    var cutString;
-    var knew = [];
-    for(var i = 0; i<namesArray.length; i++){
-      // if(namesArray[i].length > 27){
-      //   cutString = namesArray[i].slice(27);
-      //   knew.push(cutString);
-      // }else if(namesArray[i] === 'Next page' || namesArray[i] === 'Home page' || namesArray[i] === 'Previous page' || namesArray[i] === fullName){
-      //   // This needs to remove the links
-      //
-      // }else{
-      //   cutString = namesArray[i];
-      //   knew.push(cutString);
-      // }
-      console.log(namesArray[i]);
-
-    }
-    // Have to get rid of the white space in front of the names
-    knew.push(otherFullName);
-    knew.sort();
-
+  function enders(finalNamesArray){
+    console.log(finalNamesArray);
   }
 });
