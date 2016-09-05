@@ -1,8 +1,15 @@
 var request = require('request');
 var cheerio = require('cheerio');
 var prompt = require('prompt');
+var express = require('express');
+var app = express();
 var url = 'http://www.flvoters.com';
 var addons = '/by_name/index_pages/';
+
+app.get('/', function(req,res){
+
+});
+
 
 prompt.start();
 
@@ -118,6 +125,7 @@ prompt.get(['LastName','FirstName'], function(err, result){
       * Return dob
       * Get an address back
       * if statment with sex offender
+      * Need to get rid of prompt
     */
     request(hrefsArray, function(err, response, body){
       if(!err && response.statusCode === 200){
@@ -129,4 +137,8 @@ prompt.get(['LastName','FirstName'], function(err, result){
       }
     });
   }
+});
+app.listen(3000, function(){
+  console.log('I think this is working on 3000 port');
+
 });
