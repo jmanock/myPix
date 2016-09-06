@@ -1,2 +1,8 @@
-var response = require('server.js');
-console.log('This is the name you want',response);
+module.exports = function(app){
+  app.get('/', function(req, res){
+    res.render('index.html');
+  });
+  app.get('/about', function(req,res){
+    res.render('forms.html');
+  });
+};
