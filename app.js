@@ -1,8 +1,14 @@
 module.exports = function(app){
-  app.get('/', function(req, res){
-    res.render('index.html');
+  var urlencodedParser = bodyParser.urlencoded({extended:false});
+  app.get('./index.html', function(req, res){
+    res.sendFile(__dirname + '/'+'index.html');
   });
-  app.get('/about', function(req,res){
-    res.render('forms.html');
+  app.post('/process_post', urlencodedParser, function(req, res){
+    response = {
+      first_name:req.body.first_name,
+      last_name:req.body.last_name
+    };
+    console.log(response);
+    res.end(JSON.stringify(response));
   });
 };

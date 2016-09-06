@@ -1,0 +1,15 @@
+{
+  "name":"GoMapi",
+  "version":"0.1.0",
+  "description":"Trying to see if i can get geo maps working",
+  "main":"server.js",
+  "author":"me",
+  "dependencies":{
+    "express":"~4.7.2",
+    "mongoose":"~4.1.0",
+    "morgan":"~1.2.2",
+    "body-parser":"~1.5.2",
+    "jsonwebtoken":"^5.0.2",
+    "method-override":"~2.1.2"
+  }
+}
